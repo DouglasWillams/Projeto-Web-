@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Web</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .nav-buttons button {
+            color: #000; 
+            background-color: transparent;
+            border: none; 
+            font-size: 1.5rem; 
+            cursor: pointer; 
+        }
+
+        /* Botões de aumentar e diminuir a fonte com cor vermelha */
+        #increase-font, #decrease-font {
+            color: red; 
+        }
+
+        body.dark-mode .nav-buttons button {
+            color: #000; 
+        }
+
+        body {
+            text-align: justify; 
+            line-height: 1.6; 
+        }
+
+        p, li, .member p, .gallery p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#contato">Fale Comigo</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button id="dark-mode-toggle" title="Modo Escuro">🌙</button>
+                <button id="increase-font" title="Aumentar Fonte">A+</button>
+                <button id="decrease-font" title="Diminuir Fonte">A-</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Primeira Página: Apresentação -->
+        <section id="inicio" class="presentation">
+            <div class="presentationtitle">
+                <h1>Trabalho Web - Mat.01677785</h1>
+            </div>
+            <article class="member">
+                <img src="img/perfil.jpg" alt="Foto de perfil de membro">
+                <h2>Membro</h2>
+                <p>Nome: Douglas Willams Ribeiro de Brito</p>
+                <p>Competências: Técnico em redes</p>
+                <p>Experiências: Exército Brasileiro</p>
+                <p>Escolaridade: Cursando ADS 2ª Período e Técnico em redes de computadores</p>
+            </article>
+        </section>
+    
+        <!-- Segunda Página: Galeria -->
+        <section id="galeria" class="gallery">
+            <div class="galleryone">
+                <h1>Galeria de interesses</h1>
+            </div>
+            <div class="card">
+                <img src="img/time.jpg" alt="Time">
+                <p>Futebol: Time do coração - São Paulo</p>
+            </div>
+            <div class="card">
+                <img src="img/filme.jpg" alt="Imagem 2">
+                <p>Filme: Homem Aranha 1 (2002)</p>
+            </div>
+            <div class="card">
+                <img src="img/serie.jpg" alt="Imagem 3">
+                <p>Série: Friends</p>
+            </div>
+        </section>
+    
+        <!-- Terceira Página: Contato -->
+        <section id="contato" class="contact">
+            <form>
+                <h1>Fale Comigo:</h1>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="opinion">Opinião:</label>
+                <textarea id="opinion" name="opinion" rows="4" required></textarea>
+    
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; Projeto de Frontend-Framework/Desenvolvimento Web/Web Coding. </p>
+    </footer>
+
+    <script>
+        // JavaScript para manipulação das páginas
+
+        // Alternar modo escuro
+        const darkModeButton = document.getElementById('dark-mode-toggle');
+        darkModeButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Aumentar e diminuir fonte
+        const increaseFontButton = document.getElementById('increase-font');
+        const decreaseFontButton = document.getElementById('decrease-font');
+        let currentFontSize = 16;
+
+        increaseFontButton.addEventListener('click', () => {
+            currentFontSize += 2;
+            document.body.style.fontSize = `${currentFontSize}px`;
+        });
+
+        decreaseFontButton.addEventListener('click', () => {
+            if (currentFontSize > 10) {
+                currentFontSize -= 2;
+                document.body.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+
+        const opinionInput = document.getElementById('opinion');
+        const form = document.querySelector('form');
+        const minCharCount = 10; 
+
+        form.addEventListener('submit', (event) => {
+            if (opinionInput.value.length < minCharCount) {
+                event.preventDefault(); 
+                alert(`Por favor, insira pelo menos ${minCharCount} caracteres na sua opinião.`);
+            }
+        });
+
+        opinionInput.addEventListener('input', () => {
+            if (opinionInput.value.length < minCharCount) {
+                opinionInput.style.borderColor = 'red';
+                opinionInput.setCustomValidity(`A opinião deve ter pelo menos ${minCharCount} caracteres.`);
+            } else {
+                opinionInput.style.borderColor = '';
+                opinionInput.setCustomValidity('');
+            }
+        });
+    </script>
+</body>
+</html>
